@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#C0C0C0"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="bmanager_onClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="I'm a manager" />
+
+   <!-- <Button
+        android:id="@+id/labourer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="blabourer_onClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="I'm a labourer" />
+
+    <Button
+        android:id="@+id/GoogleSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="bGoogleSearch_onClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="Google Search" />
+
+    <Button
+        android:id="@+id/RecyclerActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="bRecyclerView_onClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="View Managers" />
+
+    <Button
+        android:id="@+id/ShakeActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="bShake_onClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="AccelerometerSensor" />-->
+
+    <AnalogClock
+        android:id="@+id/simpleAnalogClock"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+
+</LinearLayout>
