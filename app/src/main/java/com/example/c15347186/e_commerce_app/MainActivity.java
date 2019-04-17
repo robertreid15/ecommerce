@@ -17,23 +17,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bmanager = (Button) findViewById(R.id.manager);
-        //blabourer = (Button) findViewById(R.id.labourer);
+        blabourer = (Button) findViewById(R.id.customer);
 
     }
 
     public void bmanager_onClick(View v){
-        Toast.makeText(MainActivity.this, "call manager login", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "call admin login", Toast.LENGTH_LONG).show();
         Intent i = new Intent(MainActivity.this, AdminLogin.class);
         startActivity(i);
     }
 
 
-    /*public void blabourer_onClick(View v){
-        Intent i = new Intent(MainActivity.this, LabourerLoginActivity.class);
+    public void blabourer_onClick(View v){
+        Intent i = new Intent(MainActivity.this, CustomerLogin.class);
         startActivity(i);
     }
 
-    public void bGoogleSearch_onClick(View v){
+    /*public void bGoogleSearch_onClick(View v){
         Intent i = new Intent(MainActivity.this, GoogleSearch.class);
         startActivity(i);
     }

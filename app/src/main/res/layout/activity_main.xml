@@ -17,16 +17,16 @@
         android:backgroundTint="#3d4042"
         android:text="I'm a manager" />
 
-   <!-- <Button
-        android:id="@+id/labourer"
+    <Button
+        android:id="@+id/customer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="blabourer_onClick"
         android:textColor="#ffff"
         android:backgroundTint="#3d4042"
-        android:text="I'm a labourer" />
+        android:text="I'm a customer" />
 
-    <Button
+    <!--<Button
         android:id="@+id/GoogleSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
