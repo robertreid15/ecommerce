@@ -59,5 +59,13 @@
         android:backgroundTint="#3d4042"
         android:text="Add Item" />
 
+    <Button
+        android:id="@+id/findUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loginClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="Find Users" />
 
 </LinearLayout>

@@ -113,7 +113,9 @@ public class FindItemActivity extends AppCompatActivity {
 
             }*/
 
-            private void listenForData() {
+    /*Search for title in the items child and start with whatever is in the mInput.getText*/
+
+    private void listenForData() {
                 DatabaseReference usersDb = FirebaseDatabase.getInstance().getReference().child("Items");
                 Query query = usersDb.orderByChild("title").startAt(mInput.getText().toString()).endAt(mInput.getText().toString() + "\uf8ff");
                 query.addChildEventListener(new ChildEventListener() {

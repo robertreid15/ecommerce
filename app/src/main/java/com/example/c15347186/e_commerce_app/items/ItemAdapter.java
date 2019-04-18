@@ -47,27 +47,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
         holder.mTitle.setText(usersList.get(position).getTitle());
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        /*if (following.contains(usersList.get(position).getItemId())) {
-            holder.mBuy.setText("purchase");
-        } else {
+        if (following.contains(usersList.get(position).getTitle())) {
             holder.mBuy.setText("remove");
-        }*/
+        } else {
+            holder.mBuy.setText("purchase");
+        }
 
-        /*holder.mBuy.setOnClickListener(view -> {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            if (holder.mBuy.getText().toString().equals("purchase") || !following.contains(usersList.get(holder.getLayoutPosition()).getItemId())) {
+        holder.mBuy.setOnClickListener(view -> {
+            if (holder.mBuy.getText().toString().equals("purchase") || !following.contains(usersList.get(holder.getLayoutPosition()).getTitle())) {
                 holder.mBuy.setText("remove");
-                FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getItemId()).setValue(true);
+                FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getTitle()).setValue(true);
             } else {
                 holder.mBuy.setText("purchase");
-                FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getItemId()).removeValue();
+                FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getTitle()).removeValue();
             }
-        });*/
+        });
 
-        /*holder.itemView.setOnClickListener(view -> {
-            checkChatId(position);
-        });*/
+        holder.itemView.setOnClickListener(view -> {
+            FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getTitle()).removeValue();
+        });
     }
 
     @Override
@@ -77,11 +77,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
 
- /*   private void checkChatId(int position) {
+    /*private void checkChatId(int position) {
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String personId = usersList.get(position).getUid();
-        //PUSH CHAT ID IF NOT EXIST
+        String personId = usersList.get(position).getTitle();
+        //PUSH ID IF NOT EXIST
         DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("chats");
         chatRef.child(currentUserId).child(personId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

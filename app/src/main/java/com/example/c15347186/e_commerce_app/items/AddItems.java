@@ -1,5 +1,6 @@
 package com.example.c15347186.e_commerce_app.items;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.c15347186.e_commerce_app.CustomerLogin;
+import com.example.c15347186.e_commerce_app.MainActivity;
 import com.example.c15347186.e_commerce_app.R;
+import com.example.c15347186.e_commerce_app.findUsers.FindUserActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,7 +25,7 @@ import java.util.Map;
 
 public class AddItems extends AppCompatActivity {
     EditText title, manufacturer, price, category;
-    Button mAdd;
+    Button mAdd, mFindUsers;
 
     private DatabaseReference mDatabase;
 
@@ -34,6 +38,7 @@ public class AddItems extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAdd = (Button) findViewById(R.id.add);
+        mFindUsers = (Button) findViewById(R.id.findUsers);
 
 
         mAdd.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +62,13 @@ public class AddItems extends AppCompatActivity {
             }
         });
 
-        }
+        mFindUsers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddItems.this, FindUserActivity.class);
+                startActivity(i);
+            }
+        });
     }
+}
 
