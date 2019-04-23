@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#C0C0C0"
+    tools:context=".completeOrder">
+
+    <EditText
+        android:id="@+id/cardType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="cardType"
+        android:backgroundTint="#ffff"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff" />
+
+    <EditText
+        android:id="@+id/cardName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="cardName"
+        android:backgroundTint="#ffff"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff" />
+
+    <EditText
+        android:id="@+id/cardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="cardNumber"
+        android:backgroundTint="#ffff"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/expiryDateMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="expiryDateMonth"
+        android:backgroundTint="#ffff"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/expiryDateYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="expiryDateYear"
+        android:backgroundTint="#ffff"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff" />
+
+    <EditText
+        android:id="@+id/cvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="cvv"
+        android:backgroundTint="#ffff"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff" />
+
+    <Button
+        android:id="@+id/completeOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loginClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="complete Order" />
+
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.c15347186.e_commerce_app.payment;
+package com.example.c15347186.e_commerce_app.paymentIgnoreEverythingHere;
 
 public class CreditCard extends Card {
     public CreditCard(String nameOnCard, String number, String cvv, String expirationDate) {
