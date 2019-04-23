@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.c15347186.e_commerce_app.CustomerLogin;
 import com.example.c15347186.e_commerce_app.MainActivity;
 import com.example.c15347186.e_commerce_app.R;
+import com.example.c15347186.e_commerce_app.completeOrder;
 import com.example.c15347186.e_commerce_app.findUsers.FindUserActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public class AddItems extends AppCompatActivity {
     EditText title, manufacturer, price, category;
-    Button mAdd, mFindUsers;
+    Button mAdd, mFindUsers, completeOrder;
 
     private DatabaseReference mDatabase;
 
@@ -39,6 +40,7 @@ public class AddItems extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAdd = (Button) findViewById(R.id.add);
         mFindUsers = (Button) findViewById(R.id.findUsers);
+        completeOrder = (Button) findViewById(R.id.completeOrderAdmin);
 
 
         mAdd.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +68,14 @@ public class AddItems extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(AddItems.this, FindUserActivity.class);
+                startActivity(i);
+            }
+        });
+
+        completeOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddItems.this, completeOrder.class);
                 startActivity(i);
             }
         });

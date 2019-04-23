@@ -68,4 +68,24 @@
         android:backgroundTint="#3d4042"
         android:text="Find Users" />
 
+    <Button
+        android:id="@+id/findItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loginClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="Find Users" />
+
+    <!--This button is only temporary to take us to order class
+        Eventually we will put it on the customers screen-->
+    <Button
+        android:id="@+id/completeOrderAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loginClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="complete Order" />
+
 </LinearLayout>

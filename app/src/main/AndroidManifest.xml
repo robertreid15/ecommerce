@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".items.FindItemActivity" >
+        <activity android:name=".completeOrder" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,11 +17,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdminLogin" />
+<!--
+        <activity android:name=".completeOrder" />
+-->
         <activity android:name=".CustomerLogin" />
         <activity android:name=".items.AddItems" />
-<!--
         <activity android:name=".items.FindItemActivity" />
--->
         <activity android:name=".findUsers.FindUserActivity" />
 
     </application>
