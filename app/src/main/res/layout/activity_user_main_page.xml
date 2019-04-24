@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#C0C0C0"
+    tools:context=".UserMainPage">
+
+    <Button
+        android:id="@+id/findItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loginClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="Find Items" />
+
+    <!--This button is only temporary to take us to order class
+        Eventually we will put it on the customers screen-->
+    <Button
+        android:id="@+id/completeOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loginClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="complete Order" />
+
+</LinearLayout>

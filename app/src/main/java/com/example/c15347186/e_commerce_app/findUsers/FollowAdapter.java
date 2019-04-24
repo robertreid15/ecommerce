@@ -47,7 +47,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowViewHolders> {
     public void onBindViewHolder(final FollowViewHolders holder, int position) {
         holder.mEmail.setText(usersList.get(position).getEmail());
 
-        if (following.contains(usersList.get(position).getUid())) {
+       /* if (following.contains(usersList.get(position).getUid())) {
             holder.mFollow.setText("following");
         } else {
             holder.mFollow.setText("follow");
@@ -66,7 +66,12 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowViewHolders> {
 
         holder.itemView.setOnClickListener(view -> {
             //checkChatId(position);
-        });
+        });*/
+
+
+        /*
+        *       here we should have an onClickListener that directs admins to viewing customer carts.
+        * */
     }
 
     @Override
@@ -74,64 +79,4 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowViewHolders> {
         return this.usersList.size();
     }
 
-
-
-   /* private void checkChatId(int position) {
-
-        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String personId = usersList.get(position).getUid();
-        //PUSH CHAT ID IF NOT EXIST
-        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("chats");
-        chatRef.child(currentUserId).child(personId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.exists()) {
-                   setChatIdToFirebase(chatRef, currentUserId, personId);
-                } else {
-                    //GET CHAT ID IF EXIST
-                    getChatIdFromFirebase(chatRef, currentUserId, personId);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
-
-    private void navigateToChatActivity(String userId, String chatId) {
-        Intent intent = new Intent(context, ChatActivity.class);
-        Bundle b = new Bundle();
-        b.putString("chat_id", chatId);
-        b.putString("user_id", userId);
-        intent.putExtras(b);
-        context.startActivity(intent);
-    }
-
-    private void setChatIdToFirebase(DatabaseReference chatRef, String currentUserId, String personId){
-        String chat_id = FirebaseDatabase.getInstance().getReference().push().getKey();
-        chatRef.child(currentUserId).child(personId).child(chat_id).setValue(true);
-        chatRef.child(personId).child(currentUserId).child(chat_id).setValue(true).addOnSuccessListener(aVoid -> navigateToChatActivity(personId, chat_id));
-    }
-
-
-    private void getChatIdFromFirebase(DatabaseReference chatRef, String currentUserId, String personId){
-        chatRef.child(currentUserId).child(personId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String chatId = "";
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        chatId = ds.getKey();
-
-                    }
-                    navigateToChatActivity(personId, chatId);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }*/
 }

@@ -24,7 +24,7 @@ public abstract class AbstractCardValidator {
     }
 
     //The template method. should possibly make it Final so can't be overridden.
-    public boolean validate() {
+    public final boolean validate() {
 
         boolean cardNameValidated = validateCardName();
 

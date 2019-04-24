@@ -3,8 +3,10 @@ package com.example.c15347186.e_commerce_app;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.c15347186.e_commerce_app.cardValidation.AbstractCardValidator;
@@ -19,6 +21,7 @@ public class completeOrder extends AppCompatActivity {
             expiryDateYear, cvv;
     Button completeOrder;
 
+
     //private DatabaseReference mDatabase;
 
     //private FirebaseAuth mAuth;
@@ -31,7 +34,6 @@ public class completeOrder extends AppCompatActivity {
         //mDatabase = FirebaseDatabase.getInstance().getReference();
         completeOrder = (Button) findViewById(R.id.completeOrder);
         //mFindUsers = (Button) findViewById(R.id.findUsers);
-
 
         completeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +73,14 @@ public class completeOrder extends AppCompatActivity {
                 } else if (cardType.equals("American Express")) {
                     validator = new AmericanExpressValidation(cardName, cardNumber, expiryDateMonthInt,
                             expiryDateYearInt, cvv);
+                }
+                    else if((!cardType.equals("Visa Card")) || (!cardType.equals("MasterCard")) || (!cardType.equals("American Express"))){
+                    Toast.makeText(getApplicationContext(), "Invalid Card Type", Toast.LENGTH_SHORT).show();
 
                 }
+
+                /*Validation(String cardName, String cardNumber, int expiryDateMonth,
+                int expiryDateYear, String cvv)*/
 
                 result = validator.validate();
                 if (!result) {

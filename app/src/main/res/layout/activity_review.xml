@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#C0C0C0"
+    tools:context=".AdminLogin">
+
+    <EditText
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="comment"
+        android:backgroundTint="#ffff"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff" />
+
+    <Button
+        android:id="@+id/addReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loginClick"
+        android:textColor="#ffff"
+        android:backgroundTint="#3d4042"
+        android:text="add review" />
+
+
+
+</LinearLayout>

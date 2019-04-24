@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class AddItems extends AppCompatActivity {
     EditText title, manufacturer, price, category;
-    Button mAdd, mFindUsers, completeOrder;
+    Button mAdd, mFindUsers, mFindItems, completeOrder;
 
     private DatabaseReference mDatabase;
 
@@ -40,6 +40,7 @@ public class AddItems extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAdd = (Button) findViewById(R.id.add);
         mFindUsers = (Button) findViewById(R.id.findUsers);
+        mFindItems = (Button) findViewById(R.id.findItems);
         completeOrder = (Button) findViewById(R.id.completeOrderAdmin);
 
 
@@ -59,6 +60,8 @@ public class AddItems extends AppCompatActivity {
                 EditText editcategory = (EditText) findViewById(R.id.category);
                 String category = editcategory.getText().toString();
 
+
+
                 Item item = new Item(title, manufacturer, price, category);
                 mDatabase.child("Items").push().setValue(item);
             }
@@ -72,13 +75,7 @@ public class AddItems extends AppCompatActivity {
             }
         });
 
-        completeOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AddItems.this, completeOrder.class);
-                startActivity(i);
-            }
-        });
+
     }
 }
 

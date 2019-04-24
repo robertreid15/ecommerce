@@ -96,7 +96,7 @@ public class CustomerLogin extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Login Unnsuccessful", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(CustomerLogin.this, FindItemActivity.class);
+                    Intent i = new Intent(CustomerLogin.this, UserMainPage.class);
                     startActivity(i);
                 }
             }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.c15347186.e_commerce_app.R;
+import com.example.c15347186.e_commerce_app.Review;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -66,7 +67,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         });
 
         holder.itemView.setOnClickListener(view -> {
-            FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getTitle()).removeValue();
+            checkChatId(position);
+            //FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getTitle()).removeValue();
         });
     }
 
@@ -77,20 +79,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
 
-    /*private void checkChatId(int position) {
+    private void checkChatId(int position) {
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String personId = usersList.get(position).getTitle();
+        String itemTitle = usersList.get(position).getTitle();
         //PUSH ID IF NOT EXIST
-        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("chats");
-        chatRef.child(currentUserId).child(personId).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("reviews");
+        chatRef.child(currentUserId).child(itemTitle).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    setChatIdToFirebase(chatRef, currentUserId, personId);
+                    setChatIdToFirebase(chatRef, currentUserId, itemTitle);
                 } else {
                     //GET CHAT ID IF EXIST
-                    getChatIdFromFirebase(chatRef, currentUserId, personId);
+                    getChatIdFromFirebase(chatRef, currentUserId, itemTitle);
                 }
             }
 
@@ -101,7 +103,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     }
 
     private void navigateToChatActivity(String userId, String chatId) {
-        Intent intent = new Intent(context, ChatActivity.class);
+        Intent intent = new Intent(context, Review.class);
         Bundle b = new Bundle();
         b.putString("chat_id", chatId);
         b.putString("user_id", userId);
@@ -134,6 +136,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-    }*/
+    }
 }
 
