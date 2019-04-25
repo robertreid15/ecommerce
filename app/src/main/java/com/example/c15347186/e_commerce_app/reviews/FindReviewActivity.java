@@ -11,11 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.c15347186.e_commerce_app.R;
+import com.example.c15347186.e_commerce_app.items.Item;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -46,8 +49,9 @@ public class FindReviewActivity extends AppCompatActivity {
         mAdapter = new ReviewAdapter(results, followingIds, FindReviewActivity.this);
         mRecyclerView.setAdapter(mAdapter);
         mSearch.setOnClickListener(view -> {
-            //clear();
+            clear();
             //getAllUsers();
+            listenForData();
         });
 
     }
@@ -83,26 +87,72 @@ public class FindReviewActivity extends AppCompatActivity {
 
 
     }
+    private void listenForData() {
+        DatabaseReference usersDb = FirebaseDatabase.getInstance().getReference().child("Reviews");
+        Query query = usersDb.orderByChild("itemTitle").startAt(mInput.getText().toString()).endAt(mInput.getText().toString() + "\uf8ff");
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot ds, String s) {
 
+                //String itemTitle = ds.child("itemTitle").getValue().toString();
+
+
+                String itemTitle = "";
+                String review = ds.getKey();
+                String uid = ds.getKey();
+
+                if (ds.child("itemTitle").getValue() != null) {
+                    itemTitle = ds.child("itemTitle").getValue().toString();
+                }
+                //if(!title.equals(FirebaseAuth.getInstance().getCurrentUser().getTitle())){
+                Review obj = new Review(itemTitle, review, uid);
+                results.add(obj);
+                mAdapter.notifyDataSetChanged();
+                //}
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
     /*Search for email in the users child and start with whatever is in the mInput.getText*/
 
     /*private void getAllUsers() {
 
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Customer");
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Reviews");
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 results.clear();
                 if(dataSnapshot.exists()){
                     for(DataSnapshot ds : dataSnapshot.getChildren()){
-                        String email = ds.child("email").getValue().toString();
+                        String itemTitle = ds.child("itemTitle").getValue().toString();
                         String uid = ds.getKey();
-
-                        if(!email.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                            Review obj = new Review(email, uid);
+                        String review = ds.getKey();
+                        //if(!itemTitle.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                            Review obj = new Review(itemTitle, review, uid);
                             results.add(obj);
 
-                        }
+                        //}
                     }
                     getFollowing();
                 }
@@ -116,11 +166,11 @@ public class FindReviewActivity extends AppCompatActivity {
         });
 
 
-    }
+    }*/
     private void clear() {
         int size = this.results.size();
         this.results.clear();
         mAdapter.notifyItemRangeChanged(0, size);
-    }*/
+    }
 
 }

@@ -33,11 +33,11 @@
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content">
-            <!--<Button
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:id="@+id/follow"/>-->
+                android:id="@+id/follow"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

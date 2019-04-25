@@ -7,12 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.c15347186.e_commerce_app.R;
-import com.example.c15347186.e_commerce_app.findUsers.FollowObject;
+import com.example.c15347186.e_commerce_app.reviews.ReviewHolder;
+import com.example.c15347186.e_commerce_app.reviews.Review;
 import com.example.c15347186.e_commerce_app.findUsers.FollowViewHolders;
 
 import java.util.List;
 
-public class ReviewAdapter extends RecyclerView.Adapter<FollowViewHolders> {
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewHolder> {
 
         private List<Review> usersList;
         private List<String> following;
@@ -27,14 +28,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<FollowViewHolders> {
         }
 
         @Override
-        public FollowViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ReviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_reviews, null);
-            return new FollowViewHolders(layoutView);
+            return new ReviewHolder(layoutView);
         }
 
         @Override
-        public void onBindViewHolder(final FollowViewHolders holder, int position) {
-            holder.mEmail.setText(usersList.get(position).getItemTitle());
+        public void onBindViewHolder(final ReviewHolder holder, int position) {
+            holder.itemTitle.setText(usersList.get(position).getItemTitle());
+
         }
 
         @Override

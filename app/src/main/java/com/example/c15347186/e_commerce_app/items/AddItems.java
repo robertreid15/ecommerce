@@ -14,6 +14,7 @@ import com.example.c15347186.e_commerce_app.MainActivity;
 import com.example.c15347186.e_commerce_app.R;
 import com.example.c15347186.e_commerce_app.completeOrder;
 import com.example.c15347186.e_commerce_app.findUsers.FindUserActivity;
+import com.example.c15347186.e_commerce_app.reviews.FindReviewActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,7 +27,7 @@ import java.util.Map;
 
 public class AddItems extends AppCompatActivity {
     EditText title, manufacturer, price, category;
-    Button mAdd, mFindUsers, mFindItems, completeOrder;
+    Button mAdd, mFindUsers, mFindItems, completeOrder, mFindReviews;
 
     private DatabaseReference mDatabase;
 
@@ -42,6 +43,7 @@ public class AddItems extends AppCompatActivity {
         mFindUsers = (Button) findViewById(R.id.findUsers);
         mFindItems = (Button) findViewById(R.id.findItems);
         completeOrder = (Button) findViewById(R.id.completeOrderAdmin);
+        mFindReviews = (Button) findViewById(R.id.viewReviews);
 
 
         mAdd.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +77,13 @@ public class AddItems extends AppCompatActivity {
             }
         });
 
-
+        mFindReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddItems.this, FindReviewActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }
 
