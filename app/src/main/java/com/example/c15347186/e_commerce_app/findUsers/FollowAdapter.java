@@ -1,21 +1,12 @@
 package com.example.c15347186.e_commerce_app.findUsers;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.c15347186.e_commerce_app.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -39,7 +30,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowViewHolders> {
 
     @Override
     public FollowViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_followers_item, null);
+        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_users, null);
         return new FollowViewHolders(layoutView);
     }
 

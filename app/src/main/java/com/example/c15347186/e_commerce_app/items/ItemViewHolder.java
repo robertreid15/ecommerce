@@ -19,6 +19,4 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-
-
 }

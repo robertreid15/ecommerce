@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.c15347186.e_commerce_app.R;
-import com.example.c15347186.e_commerce_app.Review;
+import com.example.c15347186.e_commerce_app.reviews.AddReview;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -83,31 +83,31 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String itemTitle = usersList.get(position).getTitle(); // need to add in getKey
-
+        navigateToChatActivity(currentUserId, itemTitle);
         //PUSH ID IF NOT EXIST
-        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("items");
-        chatRef.child(currentUserId).child(itemTitle).addListenerForSingleValueEvent(new ValueEventListener() {
+        //DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("review");      //get rid of this
+        /*chatRef.child(currentUserId).child(itemTitle).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                /*if (!dataSnapshot.exists()) {
+                if (!dataSnapshot.exists()) {
                     setChatIdToFirebase(chatRef, currentUserId, itemTitle);
-                } else {*/
+                } else {
                     //GET CHAT ID IF EXIST
                     getChatIdFromFirebase(chatRef, currentUserId, itemTitle);
-                //}
-            }
+                }
+            }*/
 
-            @Override
+            /*@Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
-        });
+        });*/
     }
 
-    private void navigateToChatActivity(String userId, String chatId) {
-        Intent intent = new Intent(context, Review.class);
+    private void navigateToChatActivity(String currentUserId, String itemTitle) {
+        Intent intent = new Intent(context, AddReview.class);
         Bundle b = new Bundle();
-        b.putString("chat_id", chatId);
-        b.putString("user_id", userId);
+        b.putString("item_title", itemTitle);
+        b.putString("user_id", currentUserId);
         intent.putExtras(b);
         context.startActivity(intent);
     }

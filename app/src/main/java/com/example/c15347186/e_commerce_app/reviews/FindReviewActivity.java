@@ -1,4 +1,4 @@
-package com.example.c15347186.e_commerce_app.findUsers;
+package com.example.c15347186.e_commerce_app.reviews;
 
 
 import android.os.Bundle;
@@ -20,34 +20,34 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class FindUserActivity extends AppCompatActivity {
+public class FindReviewActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<String> followingIds = new ArrayList<>();
-    private ArrayList<FollowObject> results = new ArrayList<>();
+    private ArrayList<Review> results = new ArrayList<>();
     EditText mInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_users);
+        setContentView(R.layout.activity_find_review);
 
         mInput = findViewById(R.id.input);
         Button mSearch = findViewById(R.id.search);
 
-        getAllUsers();
+        //getAllUsers();
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getApplication());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new FollowAdapter(results, followingIds, FindUserActivity.this);
+        mAdapter = new ReviewAdapter(results, followingIds, FindReviewActivity.this);
         mRecyclerView.setAdapter(mAdapter);
         mSearch.setOnClickListener(view -> {
-            clear();
-            getAllUsers();
+            //clear();
+            //getAllUsers();
         });
 
     }
@@ -86,7 +86,7 @@ public class FindUserActivity extends AppCompatActivity {
 
     /*Search for email in the users child and start with whatever is in the mInput.getText*/
 
-    private void getAllUsers() {
+    /*private void getAllUsers() {
 
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Customer");
         usersRef.addValueEventListener(new ValueEventListener() {
@@ -97,8 +97,9 @@ public class FindUserActivity extends AppCompatActivity {
                     for(DataSnapshot ds : dataSnapshot.getChildren()){
                         String email = ds.child("email").getValue().toString();
                         String uid = ds.getKey();
+
                         if(!email.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                            FollowObject obj = new FollowObject(email, uid);
+                            Review obj = new Review(email, uid);
                             results.add(obj);
 
                         }
@@ -120,6 +121,6 @@ public class FindUserActivity extends AppCompatActivity {
         int size = this.results.size();
         this.results.clear();
         mAdapter.notifyItemRangeChanged(0, size);
-    }
+    }*/
 
 }

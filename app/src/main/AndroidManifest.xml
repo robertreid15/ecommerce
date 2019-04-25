@@ -22,11 +22,9 @@
         <activity android:name=".items.AddItems" />
         <activity android:name=".items.FindItemActivity" />
         <activity android:name=".findUsers.FindUserActivity" />
-<!--
-        <activity android:name=".UserMainPage" />
--->
-        <activity android:name=".Review" />
-
+        <!--         <activity android:name=".UserMainPage" /> -->
+        <activity android:name=".reviews.AddReview" />
+        <activity android:name=".reviews.FindReviewActivity"></activity>
     </application>
 
 </manifest>
