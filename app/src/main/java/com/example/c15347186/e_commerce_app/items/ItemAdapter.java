@@ -82,18 +82,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     private void checkChatId(int position) {
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String itemTitle = usersList.get(position).getTitle();
+        String itemTitle = usersList.get(position).getTitle(); // need to add in getKey
+
         //PUSH ID IF NOT EXIST
-        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("reviews");
+        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("items");
         chatRef.child(currentUserId).child(itemTitle).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.exists()) {
+                /*if (!dataSnapshot.exists()) {
                     setChatIdToFirebase(chatRef, currentUserId, itemTitle);
-                } else {
+                } else {*/
                     //GET CHAT ID IF EXIST
                     getChatIdFromFirebase(chatRef, currentUserId, itemTitle);
-                }
+                //}
             }
 
             @Override
@@ -119,7 +120,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
     private void getChatIdFromFirebase(DatabaseReference chatRef, String currentUserId, String personId){
-        chatRef.child(currentUserId).child(personId).addListenerForSingleValueEvent(new ValueEventListener() {
+        chatRef.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

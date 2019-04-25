@@ -17,7 +17,7 @@ public class UserMainPage extends AppCompatActivity {
         setContentView(R.layout.activity_user_main_page);
 
         mFindItems = (Button) findViewById(R.id.findItems);
-        completeOrder = (Button) findViewById(R.id.completeOrderAdmin);
+        completeOrder = (Button) findViewById(R.id.completeOrder);
 
         mFindItems.setOnClickListener(new View.OnClickListener() {
             @Override

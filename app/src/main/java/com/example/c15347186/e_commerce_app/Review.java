@@ -27,7 +27,7 @@ public class Review extends AppCompatActivity {
         setContentView(R.layout.activity_review);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAdd = (Button) findViewById(R.id.add);
+        mAdd = (Button) findViewById(R.id.addReview);
 
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         personId = getIntent().getStringExtra("user_id");
@@ -39,7 +39,9 @@ public class Review extends AppCompatActivity {
                 EditText editTitle = (EditText) findViewById(R.id.review);
                 String title = editTitle.getText().toString();
 
-                mDatabase.child("Items").push().setValue(title);
+                //mDatabase.child("Items").push().setValue(title);
+                FirebaseDatabase.getInstance().getReference().child("Items").child(chatId).child("review").child(personId).push().setValue(title);
+
 
             }
         });
