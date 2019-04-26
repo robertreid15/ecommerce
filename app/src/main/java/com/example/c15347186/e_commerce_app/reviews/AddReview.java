@@ -40,7 +40,7 @@ public class AddReview extends AppCompatActivity {
                 EditText editTitle = (EditText) findViewById(R.id.review);
                 String userRev = editTitle.getText().toString();
 
-                Review review = new Review(userRev, itemTitle, personId);
+                Review review = new ReviewBuilder().setReview(userRev).setItemTitle(itemTitle).setUserId(personId).createReview();
                 mDatabase.child("Reviews").push().setValue(review);
                 //mDatabase.child("Reviews").child(personId).child(itemTitle).push().setValue(title);
                 //mDatabase.child("reviews").push().setValue(review);

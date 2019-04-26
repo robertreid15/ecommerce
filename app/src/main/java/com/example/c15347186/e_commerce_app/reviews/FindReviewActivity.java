@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.c15347186.e_commerce_app.R;
-import com.example.c15347186.e_commerce_app.items.Item;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -105,7 +104,7 @@ public class FindReviewActivity extends AppCompatActivity {
                     itemTitle = ds.child("itemTitle").getValue().toString();
                 }
                 //if(!title.equals(FirebaseAuth.getInstance().getCurrentUser().getTitle())){
-                Review obj = new Review(itemTitle, review, uid);
+                Review obj = new ReviewBuilder().setReview(itemTitle).setItemTitle(review).setUserId(uid).createReview();
                 results.add(obj);
                 mAdapter.notifyDataSetChanged();
                 //}
