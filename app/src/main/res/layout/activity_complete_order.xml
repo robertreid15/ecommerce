@@ -74,7 +74,6 @@
         android:id="@+id/completeOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="loginClick"
         android:textColor="#ffff"
         android:backgroundTint="#3d4042"
         android:text="complete Order" />

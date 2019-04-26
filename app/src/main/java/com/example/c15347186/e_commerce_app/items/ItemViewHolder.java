@@ -9,6 +9,7 @@ import com.example.c15347186.e_commerce_app.R;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
     public TextView mTitle;
+    //public TextView mManufacturer;
     public Button mBuy;
 
     public ItemViewHolder(View itemView){
@@ -16,6 +17,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
         mTitle = itemView.findViewById(R.id.title);
         mBuy = itemView.findViewById(R.id.buy);
+        //mManufacturer = itemView.findViewById(R.id.manufacturer);
 
     }
 

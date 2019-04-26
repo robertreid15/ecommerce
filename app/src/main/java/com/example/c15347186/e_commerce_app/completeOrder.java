@@ -1,98 +1,131 @@
 package com.example.c15347186.e_commerce_app;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.c15347186.e_commerce_app.cardValidation.AbstractCardValidator;
 import com.example.c15347186.e_commerce_app.cardValidation.AmericanExpressValidation;
 import com.example.c15347186.e_commerce_app.cardValidation.MastercardValidation;
 import com.example.c15347186.e_commerce_app.cardValidation.VisaValidation;
+import com.example.c15347186.e_commerce_app.cardValidation.AbstractCardValidator;
+import com.example.c15347186.e_commerce_app.items.Item;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 
 public class completeOrder extends AppCompatActivity {
 
-    EditText cardType, cardName, cardNumber, expiryDateMonth,
-            expiryDateYear, cvv;
+    private List<Item> cart;
+
+    FirebaseDatabase mFirebaseDatabase;
+    FirebaseAuth.AuthStateListener mAuthListener;
+    DatabaseReference myRef;
+    static final String TAG = "AddToDatabase";
+    private FirebaseAuth mAuth;
+    private Context context;
+    String userID;
+    Boolean title;
+
+    EditText cardType, cardName, number, expiryMonth,
+            expiryYear, editCvv;
     Button completeOrder;
 
-
-    //private DatabaseReference mDatabase;
-
-    //private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_order);
 
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
-        completeOrder = (Button) findViewById(R.id.completeOrder);
-        //mFindUsers = (Button) findViewById(R.id.findUsers);
+        completeOrder = findViewById(R.id.completeOrder);
+        cardType = findViewById(R.id.cardType);
+        cardName = findViewById(R.id.cardName);
+        number = findViewById(R.id.cardNumber);
+        expiryMonth = findViewById(R.id.expiryDateMonth);
+        expiryYear = findViewById(R.id.expiryDateYear);
+        editCvv = findViewById(R.id.cvv);
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
 
         completeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                EditText editCardName = (EditText) findViewById(R.id.cardName);
-                String cardName = editCardName.getText().toString();
+                String name = cardName.getText().toString();
 
-                EditText editcardNumber = (EditText) findViewById(R.id.cardNumber);
-                String cardNumber = editcardNumber.getText().toString();
+                String cardNumber = number.getText().toString();
 
-                EditText editexpiryDateMonth = (EditText) findViewById(R.id.expiryDateMonth);
-                String expiryDateMonth1 = editexpiryDateMonth.getText().toString();
-                int expiryDateMonthInt =Integer.parseInt(expiryDateMonth1);
+                String cardExpiryMonth = expiryMonth.getText().toString();
+                int expiryDateMonthInt = Integer.parseInt(cardExpiryMonth);
 
-                EditText editexpiryDateYear = (EditText) findViewById(R.id.expiryDateYear);
-                String expiryDateYear1 = editexpiryDateYear.getText().toString();
-                int expiryDateYearInt =Integer.parseInt(expiryDateYear1);
+                String cardExpiryYear = expiryYear.getText().toString();
+                int expiryDateYearInt =Integer.parseInt(cardExpiryYear);
 
-                EditText editcvv = (EditText) findViewById(R.id.cvv);
-                String cvv = editcvv.getText().toString();
+                String cvv = editCvv.getText().toString();
 
-                EditText editcardType = (EditText) findViewById(R.id.cardType);
-                String cardType = editcardType.getText().toString();
+                String type = cardType.getText().toString();
 
                 boolean result = false;
                 AbstractCardValidator validator = null;
 
-                if (cardType.equals("Visa Card")) {
-                    validator = new VisaValidation(cardName, cardNumber, expiryDateMonthInt,
+                if (type.trim().equalsIgnoreCase("Visa Card")) {
+                    validator = new VisaValidation(name, cardNumber, expiryDateMonthInt,
                             expiryDateYearInt, cvv);
 
-                } else if (cardType.equals("MasterCard")) {
-                    validator = new MastercardValidation(cardName, cardNumber, expiryDateMonthInt,
+                } else if (type.trim().equalsIgnoreCase("MasterCard")) {
+                    validator = new MastercardValidation(name, cardNumber, expiryDateMonthInt,
                             expiryDateYearInt, cvv);
 
-                } else if (cardType.equals("American Express")) {
-                    validator = new AmericanExpressValidation(cardName, cardNumber, expiryDateMonthInt,
+                } else if (type.trim().equalsIgnoreCase("American Express")) {
+                    validator = new AmericanExpressValidation(name, cardNumber, expiryDateMonthInt,
                             expiryDateYearInt, cvv);
-                }
-                    else if((!cardType.equals("Visa Card")) || (!cardType.equals("MasterCard")) || (!cardType.equals("American Express"))){
-                    Toast.makeText(getApplicationContext(), "Invalid Card Type", Toast.LENGTH_SHORT).show();
 
                 }
-
-                /*Validation(String cardName, String cardNumber, int expiryDateMonth,
-                int expiryDateYear, String cvv)*/
 
                 result = validator.validate();
                 if (!result) {
                     Toast.makeText(getApplicationContext(), "Invalid Card Details", Toast.LENGTH_SHORT).show();
 
-
-                } else {
+                }
+                else {
+                    final FirebaseUser user = mAuth.getCurrentUser();
+                    userID = user.getUid();
                     Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                    final DatabaseReference cartDb = FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(userID).child("cart");
+                    cartDb.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                //title = ds.child(getTitle()).getValue(String.class);
+                                Boolean item = ds.getValue(Boolean.class);
+                                myRef.child("Users").child("Customer").child(userID).child("purchase_history").push().setValue(item);
+                                Intent i = new Intent(completeOrder.this, UserMainPage.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }
 
-                    /*
-                    *       There'll be functionality here eventually. just have a toast meessage so far in order to test
-                    * */
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+
+                    });
                 }
             }
         });

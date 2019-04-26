@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.c15347186.e_commerce_app.R;
 import com.example.c15347186.e_commerce_app.reviews.AddReview;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,6 +49,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
         holder.mTitle.setText(usersList.get(position).getTitle());
+        //holder.mManufacturer.setText(usersList.get(position).getTitle());
+
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if (following.contains(usersList.get(position).getTitle())) {
@@ -60,7 +63,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
             if (holder.mBuy.getText().toString().equals("purchase") || !following.contains(usersList.get(holder.getLayoutPosition()).getTitle())) {
                 holder.mBuy.setText("remove");
                 FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getTitle()).setValue(true);
-            } else {
+            } else{
                 holder.mBuy.setText("purchase");
                 FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(userId).child("cart").child(usersList.get(holder.getLayoutPosition()).getTitle()).removeValue();
             }

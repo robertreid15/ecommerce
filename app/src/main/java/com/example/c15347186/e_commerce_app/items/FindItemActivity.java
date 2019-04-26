@@ -129,7 +129,8 @@ public class FindItemActivity extends AppCompatActivity {
                             title = ds.child("title").getValue().toString();
                         }
                         //if(!title.equals(FirebaseAuth.getInstance().getCurrentUser().getTitle())){
-                            Item obj = new Item(title,  manufacturer,  price,  category);
+                        Item obj = new Item(title,  manufacturer,  price,  category);
+                        //Item obj = new ItemBuilder().setTitle(title).setManufacturer(manufacturer).setPrice(price).setCategory(category).createItem();
                             results.add(obj);
                             mAdapter.notifyDataSetChanged();
                         //}
